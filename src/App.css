@@ -1,0 +1,1095 @@
+/* ── LOADING ── */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: var(--void);
+  z-index: 8000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.8s ease;
+}
+#loading.out {
+  opacity: 0;
+  pointer-events: none;
+}
+.book-seal {
+  position: relative;
+  width: 150px;
+  height: 190px;
+  margin-bottom: 46px;
+}
+.book-spine {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(to right, #0a0704, #1a1008);
+  border: 1px solid var(--gold-leaf);
+  border-right: none;
+}
+.book-cover {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--gold-leaf);
+  background: linear-gradient(160deg, #1a1008, #0e0905, #1a1008);
+  box-shadow: inset 0 0 40px #00000088, 4px 4px 0 #000;
+}
+.book-ornament {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 74px;
+  height: 74px;
+  border: 1px solid var(--gold-leaf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--gold-leaf);
+  animation: seal-breathe 3s ease-in-out infinite;
+}
+.book-ornament::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--gold-leaf);
+  opacity: 0.35;
+  transform: rotate(45deg);
+}
+.book-title-seal {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--gold-leaf);
+  opacity: 0.6;
+}
+@keyframes seal-breathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; box-shadow: 0 0 30px var(--gold-leaf)44; }
+}
+
+.loading-prompt {
+  text-align: center;
+  color: var(--parchment2);
+  opacity: 0.6;
+}
+.loading-prompt > p {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+#pilgrim-name {
+  display: block;
+  margin: 0 auto 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--stain);
+  color: var(--parchment);
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  padding: 6px 16px;
+  outline: none;
+  width: 220px;
+  letter-spacing: 3px;
+  caret-color: var(--blood2);
+}
+#pilgrim-name::placeholder {
+  color: #3a3020;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.name-sub {
+  font-size: 10px;
+  color: #4a3a28;
+  letter-spacing: 2px;
+  text-align: center;
+}
+#open-book-btn {
+  display: block;
+  margin: 18px auto 0;
+  background: transparent;
+  border: 1px solid var(--stain);
+  color: var(--stain);
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 4px;
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+#open-book-btn:hover {
+  background: var(--blood);
+  border-color: var(--blood);
+  color: var(--parchment);
+  box-shadow: 0 0 30px var(--blood)55;
+}
+.loading-remembered {
+  margin-top: 13px;
+  text-align: center;
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold-leaf);
+  opacity: 0;
+  transition: opacity 1s;
+  letter-spacing: 2px;
+}
+.loading-remembered.visible {
+  opacity: 1;
+}
+.loading-credit {
+  position: absolute;
+  bottom: 26px;
+  font-size: 9px;
+  color: #2a2018;
+  letter-spacing: 4px;
+}
+
+/* ── MANUSCRIPT ── */
+#manuscript {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 0 120px;
+}
+#manuscript::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--parchment) 0%, #dfd0b2 8%, var(--parchment2) 20%, #cfc0a0 30%, var(--parchment2) 45%, var(--parchment) 55%, var(--parchment2) 70%, #d0c0a0 85%, var(--parchment) 100%);
+  z-index: -1;
+  box-shadow: -8px 0 40px #00000055, 8px 0 40px #00000055, 0 0 120px #00000077;
+}
+#manuscript::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 40px;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 200px 100px at 15% 8%, #7a5a3a22, transparent),
+    radial-gradient(ellipse 120px 80px at 85% 22%, #5a4a2a18, transparent),
+    radial-gradient(ellipse 300px 150px at 50% 44%, #9a7a4a0e, transparent),
+    radial-gradient(ellipse 180px 120px at 10% 68%, #6a5a3a15, transparent),
+    radial-gradient(ellipse 100px 200px at 92% 79%, #5a4a2a12, transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── COVER ── */
+#cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px;
+  text-align: center;
+  position: relative;
+  border-bottom: 3px double var(--aged);
+}
+.cover-border-frame {
+  position: absolute;
+  inset: 30px;
+  border: 1px solid var(--aged);
+  pointer-events: none;
+}
+.cover-border-frame::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--aged);
+  opacity: 0.4;
+}
+.cover-border-frame::after {
+  content: '✦';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--parchment);
+  padding: 0 10px;
+  color: var(--gold-leaf);
+  font-size: 14px;
+}
+.cover-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: var(--gold-leaf);
+  border-style: solid;
+  opacity: 0.5;
+}
+.cover-corner.tl { top: 50px; left: 50px; border-width: 2px 0 0 2px; }
+.cover-corner.tr { top: 50px; right: 50px; border-width: 2px 2px 0 0; }
+.cover-corner.bl { bottom: 50px; left: 50px; border-width: 0 0 2px 2px; }
+.cover-corner.br { bottom: 50px; right: 50px; border-width: 0 2px 2px 0; }
+.cover-era {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--margin-note);
+  margin-bottom: 38px;
+}
+.cover-ornament {
+  color: var(--gold-leaf);
+  font-size: 22px;
+  letter-spacing: 12px;
+  margin-bottom: 28px;
+  opacity: 0.6;
+}
+.cover-seal {
+  width: 84px;
+  height: 84px;
+  border: 2px solid var(--gold-leaf);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  margin: 0 auto 34px;
+  color: var(--gold-leaf);
+  opacity: 0.62;
+  position: relative;
+}
+.cover-seal::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--gold-leaf);
+  border-radius: 50%;
+  opacity: 0.35;
+}
+.cover-main-title {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: clamp(22px, 5vw, 48px);
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-shadow: 2px 2px 0 var(--parchment3);
+}
+.cover-main-title::first-letter {
+  font-size: 1.8em;
+  float: left;
+  line-height: 0.72;
+  padding-right: 8px;
+  color: var(--rubric);
+}
+.cover-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--stain);
+  letter-spacing: 2px;
+  margin-bottom: 44px;
+}
+.cover-author {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--stain);
+  letter-spacing: 3px;
+  margin-top: 16px;
+}
+.cover-scroll-hint {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.32;
+  animation: hint-pulse 2.5s ease-in-out infinite;
+}
+.cover-scroll-hint span {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--stain);
+}
+.cover-scroll-hint::after {
+  content: '↓';
+  font-size: 20px;
+  color: var(--stain);
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.22; }
+  50% { opacity: 0.5; }
+}
+
+/* ── CHAPTER ── */
+.chapter {
+  padding: 78px 78px 58px;
+  position: relative;
+  border-bottom: 1px solid var(--parchment3);
+}
+.chapter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 116px;
+  width: 1px;
+  background: var(--blood);
+  opacity: 0.2;
+}
+.chapter-header {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 34px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--aged);
+}
+.chapter-num {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 11px;
+  color: var(--rubric);
+  letter-spacing: 3px;
+  white-space: nowrap;
+  opacity: 0.78;
+}
+.chapter-title {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: clamp(16px, 3vw, 25px);
+  color: var(--ink);
+  line-height: 1.2;
+}
+.margin-note {
+  position: absolute;
+  right: -7px;
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  color: var(--margin-note);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  opacity: 0.58;
+  letter-spacing: 2px;
+}
+.chapter-body p {
+  font-size: 14px;
+  line-height: 2.1;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  text-align: justify;
+  text-indent: 2em;
+}
+.chapter-body p:first-of-type {
+  text-indent: 0;
+}
+.chapter-body p:first-of-type::first-letter {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 4em;
+  float: left;
+  line-height: 0.72;
+  padding-right: 8px;
+  padding-top: 6px;
+  color: var(--rubric);
+  text-shadow: 1px 1px 0 var(--parchment3);
+}
+.chapter-body p strong {
+  color: var(--rubric);
+  font-weight: 700;
+}
+
+.rubric {
+  font-family: 'Uncial Antiqua', serif;
+  color: var(--rubric);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin: 32px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--blood);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rubric::before {
+  content: '✦';
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+.illuminated {
+  border: 1px solid var(--aged);
+  background: linear-gradient(135deg, #ddd0b060, #c8b89040);
+  padding: 22px 28px;
+  margin: 24px 0;
+  position: relative;
+}
+.illuminated::before,
+.illuminated::after {
+  content: '❧';
+  position: absolute;
+  font-size: 15px;
+  color: var(--gold-leaf);
+  opacity: 0.48;
+}
+.illuminated::before { top: 7px; left: 10px; }
+.illuminated::after { bottom: 7px; right: 10px; transform: rotate(180deg); }
+.illuminated p {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+  text-align: center;
+  text-indent: 0 !important;
+  margin: 0 !important;
+}
+
+hr.ms {
+  border: none;
+  border-top: 1px solid var(--aged);
+  margin: 32px 0;
+  position: relative;
+  text-align: center;
+}
+hr.ms::after {
+  content: '· · ✦ · ·';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--parchment);
+  padding: 0 14px;
+  color: var(--gold-leaf);
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+
+/* ── GLOSSARY ── */
+.glossary-entry {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  border-bottom: 1px solid #c8b88030;
+}
+.glossary-term {
+  padding: 12px 14px 12px 0;
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 11.5px;
+  color: var(--ink);
+  border-right: 1px solid #c8b88040;
+}
+.glossary-def {
+  padding: 12px 0 12px 20px;
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: var(--ink-light);
+}
+
+/* ── REGIONS ── */
+.region-entry {
+  margin-bottom: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px dashed var(--parchment3);
+}
+.region-entry:last-child {
+  border-bottom: none;
+}
+.region-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.region-numeral {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 28px;
+  color: var(--gold-leaf);
+  line-height: 1;
+  opacity: 0.52;
+  min-width: 32px;
+}
+.region-name {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 18px;
+  color: var(--ink);
+}
+.region-subtitle {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--stain);
+  letter-spacing: 1px;
+}
+.region-desc {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--ink-light);
+  margin-bottom: 10px;
+  text-indent: 2em;
+  text-align: justify;
+}
+.region-npc {
+  font-size: 11.5px;
+  color: var(--rubric);
+  font-style: italic;
+  margin-top: 7px;
+}
+.region-kws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.region-kw {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--stain);
+  border-bottom: 1px solid var(--aged);
+  padding-bottom: 1px;
+}
+
+/* ── RANK TABLE ── */
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+.rank-table th {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--rubric);
+  border-bottom: 2px solid var(--blood);
+  padding: 9px 11px;
+  text-align: left;
+  background: linear-gradient(to bottom, var(--parchment3)2a, transparent);
+}
+.rank-table td {
+  padding: 12px 11px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--ink-light);
+  border-bottom: 1px solid #c8b88028;
+  vertical-align: top;
+}
+.rank-table tr:last-child td {
+  border-bottom: none;
+}
+.rank-glyph {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 21px;
+  font-weight: 700;
+}
+.rank-name-cell {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 13.5px;
+}
+.rg { color: #c09040; }
+.rm { color: #8b1a1a; }
+.rc { color: #686868; }
+.rd { color: #8a6030; }
+.rk { color: #4a4a4a; }
+.rn { color: #8a8a78; }
+
+/* ── CODEX ── */
+.codex-filter {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--aged);
+  padding-bottom: 11px;
+}
+.codex-filter-btn {
+  background: transparent;
+  border: 1px solid var(--aged);
+  color: var(--stain);
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11.5px;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+.codex-filter-btn.active,
+.codex-filter-btn:hover {
+  background: var(--blood);
+  border-color: var(--blood);
+  color: var(--parchment);
+}
+
+.codex-entry {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  border: 1px solid #c8b88038;
+  margin-bottom: 1px;
+  transition: border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.codex-entry:hover {
+  border-color: var(--blood2);
+}
+.codex-entry::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--blood);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s;
+}
+.codex-entry:hover::before {
+  transform: scaleY(1);
+}
+.codex-entry.hidden {
+  display: none;
+}
+
+.codex-rank-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 8px;
+  gap: 5px;
+  text-align: center;
+  background: linear-gradient(to bottom, #c8b89015, #b8a87008);
+  border-right: 1px solid #c8b88038;
+}
+.codex-rank-glyph {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 24px;
+  line-height: 1;
+}
+.codex-rank-label {
+  font-size: 8.5px;
+  letter-spacing: 2px;
+  color: var(--stain);
+}
+
+.codex-body {
+  padding: 16px 20px;
+}
+.codex-name {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.codex-meta {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10.5px;
+  color: var(--stain);
+  letter-spacing: 1px;
+  margin-bottom: 9px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c8b88028;
+}
+.codex-desc {
+  font-size: 12.5px;
+  line-height: 1.85;
+  color: var(--ink-light);
+  margin-bottom: 7px;
+}
+.ability-block {
+  margin: 6px 0;
+}
+.ability-name {
+  font-size: 11px;
+  color: var(--rubric);
+  letter-spacing: 1px;
+}
+.ability-name::before { content: '「'; }
+.ability-name::after { content: '」'; }
+.ability-effect {
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--ink-light);
+  margin-left: 1em;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+.codex-appearance {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11.5px;
+  color: var(--stain);
+  border-top: 1px solid #c8b88022;
+  padding-top: 6px;
+  margin-top: 6px;
+  line-height: 1.65;
+}
+.codex-fragment {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--gold-leaf);
+  border-top: 1px solid #c8b88022;
+  padding-top: 6px;
+  margin-top: 5px;
+}
+.codex-section {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 12px;
+  color: var(--rubric);
+  margin: 28px 0 14px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--blood);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.codex-section::before {
+  content: '✦';
+  font-size: 9px;
+  opacity: 0.6;
+}
+
+/* ── FRAGMENTS ── */
+.fragment-list {
+  border: 1px solid var(--aged);
+}
+.fragment-row {
+  display: grid;
+  grid-template-columns: 50px 105px 1fr 145px;
+  align-items: center;
+  padding: 17px 20px;
+  border-bottom: 1px solid #c8b88026;
+  gap: 16px;
+  transition: background 0.3s;
+}
+.fragment-row:last-child {
+  border-bottom: none;
+}
+.fragment-row:hover {
+  background: #c8b8900d;
+}
+.frag-gem {
+  width: 32px;
+  height: 32px;
+  transform: rotate(45deg);
+  border: 1px solid;
+  position: relative;
+  flex-shrink: 0;
+}
+.frag-gem::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 32%;
+  height: 32%;
+  background: #ffffff44;
+}
+.frag-name {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 17px;
+  color: var(--ink);
+}
+.frag-desc {
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--stain);
+  font-style: italic;
+}
+.frag-owner {
+  font-size: 11.5px;
+  color: var(--ink-light);
+  text-align: right;
+}
+.ff { border-color: #4488ff; box-shadow: 0 0 10px #4488ff2a; background: #4488ff0b; }
+.fw { border-color: #9944cc; box-shadow: 0 0 10px #9944cc2a; background: #9944cc0b; }
+.fwi { border-color: #cc6622; box-shadow: 0 0 10px #cc66222a; background: #cc66220b; }
+.fs { border-color: #22aa66; box-shadow: 0 0 10px #22aa662a; background: #22aa660b; }
+.fl { border-color: #cc3366; box-shadow: 0 0 10px #cc33662a; background: #cc33660b; }
+
+/* ── COLOPHON ── */
+#colophon {
+  padding: 78px 78px 100px;
+  text-align: center;
+}
+.colophon-ornament {
+  font-size: 42px;
+  color: var(--gold-leaf);
+  opacity: 0.36;
+  margin-bottom: 30px;
+  letter-spacing: 12px;
+}
+.colophon-text {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 2.3;
+  color: var(--stain);
+  max-width: 440px;
+  margin: 0 auto 42px;
+}
+.colophon-final {
+  font-family: 'Uncial Antiqua', serif;
+  font-size: 20px;
+  color: var(--rubric);
+  margin-bottom: 34px;
+}
+.colophon-line {
+  width: 170px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--aged), transparent);
+  margin: 24px auto;
+}
+.colophon-credit {
+  font-family: 'IM Fell English', serif;
+  font-size: 11px;
+  color: var(--stain);
+  letter-spacing: 4px;
+  opacity: 0.52;
+}
+
+/* ── RIBBON ── */
+#ribbon-nav {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ribbon-tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  background: var(--ink-light);
+  color: var(--parchment3);
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 12px 7px;
+  text-decoration: none;
+  transition: all 0.3s;
+  border-left: 2px solid var(--blood);
+  opacity: 0.62;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ribbon-tab span {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+.ribbon-tab:hover {
+  background: var(--blood);
+  opacity: 1;
+  color: var(--parchment);
+  padding-right: 11px;
+}
+
+/* ── APPEAR ── */
+.appear {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.85s ease, transform 0.85s ease;
+}
+.appear.visible {
+  opacity: 1;
+  transform: none;
+}
+.appear:nth-child(2) { transition-delay: 0.08s; }
+.appear:nth-child(3) { transition-delay: 0.16s; }
+.appear:nth-child(4) { transition-delay: 0.24s; }
+.appear:nth-child(5) { transition-delay: 0.32s; }
+
+
+/* ══════════════════════════════════════
+   NAV RIGHT PANE & BGM BUTTON
+   스테인드글라스 성당 스타일
+══════════════════════════════════════ */
+.nav-right-pane {
+  margin-left: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.nav-user {
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--lead-line, #1a1a1a);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-dim, #9a8a70);
+}
+
+/* ── BGM 버튼 전체 컨테이너 ── */
+.nav-bgm-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 1.3rem;
+  border: none;
+  border-left: 1px solid var(--lead-line, #1a1a1a);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.4s;
+  overflow: hidden;
+  min-width: 110px;
+}
+
+/* 호버 시 미묘한 루비 틴트 */
+.nav-bgm-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(139, 10, 26, 0.0);
+  transition: background 0.4s;
+}
+.nav-bgm-btn:hover::before {
+  background: rgba(139, 10, 26, 0.07);
+}
+
+/* ON 상태: 상단에 얇은 루비 라인 */
+.nav-bgm-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ruby-l, #cc1a2a), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.nav-bgm-btn.active::after {
+  opacity: 1;
+}
+
+/* ── 스테인드글라스 보석 ── */
+.bgm-gem-wrap {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.bgm-gem {
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--text-dim, #9a8a70);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+/* ON: 보석이 루비 색으로 빛남 */
+.nav-bgm-btn.active .bgm-gem {
+  background: var(--ruby-l, #cc1a2a);
+  box-shadow:
+    0 0 6px var(--ruby-l, #cc1a2a),
+    0 0 14px rgba(204, 26, 42, 0.5);
+}
+
+/* 보석 외부 글로우 링 */
+.bgm-gem-glow {
+  display: block;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: 1px solid transparent;
+  transition: border-color 0.4s, box-shadow 0.4s;
+  opacity: 0;
+}
+.nav-bgm-btn.active .bgm-gem-glow {
+  border-color: rgba(204, 26, 42, 0.4);
+  opacity: 1;
+  animation: gem-pulse 2s ease-in-out infinite;
+}
+@keyframes gem-pulse {
+  0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1);   opacity: 0.6; }
+  50%       { transform: translate(-50%, -50%) rotate(45deg) scale(1.4); opacity: 0.2; }
+}
+
+/* ── 음파 바 ── */
+.bgm-bars {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 18px;
+}
+
+.bgm-bar {
+  display: block;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--text-dim, #9a8a70);
+  transform-origin: bottom center;
+  transition: background 0.4s;
+  /* 꺼진 상태: 낮은 높이로 고정 */
+  height: 4px;
+}
+
+/* ON 상태 */
+.nav-bgm-btn.active .bgm-bar {
+  background: var(--ruby-l, #cc1a2a);
+}
+.nav-bgm-btn.active .bgm-bar:nth-child(1) {
+  animation: wave 0.65s ease-in-out infinite alternate;
+  animation-delay: 0s;
+}
+.nav-bgm-btn.active .bgm-bar:nth-child(2) {
+  animation: wave 0.85s ease-in-out infinite alternate;
+  animation-delay: 0.18s;
+}
+.nav-bgm-btn.active .bgm-bar:nth-child(3) {
+  animation: wave 0.70s ease-in-out infinite alternate;
+  animation-delay: 0.09s;
+}
+.nav-bgm-btn.active .bgm-bar:nth-child(4) {
+  animation: wave 0.90s ease-in-out infinite alternate;
+  animation-delay: 0.27s;
+}
+
+@keyframes wave {
+  from { height: 3px;  opacity: 0.5; }
+  to   { height: 16px; opacity: 1.0; }
+}
+
+/* ── 텍스트 라벨 ── */
+.bgm-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: var(--text-dim, #9a8a70);
+  transition: color 0.4s;
+  white-space: nowrap;
+  position: relative; /* ::before 위에 */
+}
+.nav-bgm-btn.active .bgm-label {
+  color: var(--ruby-l, #cc1a2a);
+  text-shadow: 0 0 8px rgba(204, 26, 42, 0.4);
+}
