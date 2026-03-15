@@ -409,8 +409,8 @@ const BGM_CSS = `
   border-left: 2px solid #3a6aee;
 }
 .rli-npc-hint {
-  font-size: 0.5rem;
-  color: rgba(58,106,238,0.5);
+  font-size: 0.8rem;
+  color: rgba(240,230,200,0.6);
   letter-spacing: 0.1em;
 }
 
@@ -710,13 +710,18 @@ const MAGIC_ROWS = [
 ]
 
 const REGIONS = [
-  { num: 'I',   name: '희망의 제단',             sub: 'Altar of Hope',               npc: '최종 목적지',       npcId: null,      desc: '만년설 산맥 정상. 세계의 저주를 끝낼 수 있는 유일한 장소. 세 가지 방법 중 하나를 선택해야 한다.', cx: 50, cy: 10 },
-  { num: 'II',  name: '침묵의 숲, 에델가르드',    sub: 'Edelgard — Forest of Silence', npc: '요정 아이린',       npcId: 'irin',    desc: '안개가 정신을 갉아먹어 소실을 유도하는 울창한 숲. 나무와 융합된 망자들이 도사리고 있다.', cx: 12, cy: 45 },
-  { num: 'III', name: '잿빛 성벽 도시, 루인하르트', sub: 'Ruinhart — Ashen Walled City', npc: '왕 카라',          npcId: 'kara',    desc: '과거 왕국의 수도. 지금은 도박장과 시체가 뒤섞인 타락한 도시. 지하수로에는 반인반괴들이 숨어 산다.', cx: 50, cy: 50 },
-  { num: 'IV',  name: '깊은 수면의 항구, 타르토스', sub: 'Tartos — Port of Deep Sleep',  npc: '해적 선장 루베란', npcId: 'luveran', desc: '짙은 안개 속 저주받은 항구. 유령선들이 검푸른 바다를 표류한다. 한때 왕국의 주요 무역항이었다.', cx: 50, cy: 85 },
-  { num: 'V',   name: '지식과 절망의 탑, 아스테리아', sub: 'Asteria — Tower of Wisdom',  npc: '마탑주 엘라',     npcId: 'ella',    desc: '검게 오염된 마법 수정이 가득한 무너진 마탑. 소수의 마법사만 살아남아 있다.', cx: 50, cy: 18 },
-  { num: 'VI',  name: '재와 먼지의 협곡, 루멘',   sub: 'Canyon of Lumen',              npc: '리디아의 출생지', npcId: 'lydia',   desc: '회색 재로 뒤덮인 과거의 처형장. 하늘은 항상 잿빛 구름으로 가려진다. 곳곳에 망자가 존재한다.', cx: 88, cy: 50 },
-  { num: 'VII', name: '마지막 용의 둥지',         sub: 'Nest of the Last Dragon',      npc: '최후의 용 오닉시아', npcId: 'onixia', desc: '지하 깊숙이 불과 용암이 흐르는 동굴. 이 세계 마지막 용이 세상의 멸망을 지켜보고 있다.', cx: 88, cy: 18 },
+  // II: 에델가르드 서쪽, I: 희망의 제단은 에델가르드 더 서쪽
+  { num: 'I',   name: '희망의 제단',               sub: 'Altar of Hope',               npc: '최종 목적지',         npcId: null,      desc: '만년설 산맥 정상. 세계의 저주를 끝낼 수 있는 유일한 장소. 세 가지 방법 중 하나를 선택해야 한다.', cx: 10, cy: 45 },
+  { num: 'II',  name: '에델가르드',      sub: 'Edelgard — Forest of Silence', npc: '요정 아이린',         npcId: 'irin',    desc: '안개가 정신을 갉아먹어 소실을 유도하는 울창한 숲. 나무와 융합된 망자들이 도사리고 있다.', cx: 25, cy: 50 },
+  // III: 루인하르트 중앙
+  { num: 'III', name: '루인하르트', sub: 'Ruinhart — Ashen Walled City', npc: '왕 카라',            npcId: 'kara',    desc: '과거 왕국의 수도. 지금은 도박장과 시체가 뒤섞인 타락한 도시. 지하수로에는 반인반괴들이 숨어 산다.', cx: 50, cy: 50 },
+  // V: 아스테리아 북쪽, VII: 아스테리아 북쪽 끝(마지막 용의 둥지)
+  { num: 'V',   name: '아스테리아', sub: 'Asteria — Tower of Wisdom',  npc: '마탑주 엘라',       npcId: 'ella',    desc: '검게 오염된 마법 수정이 가득한 무너진 마탑. 소수의 마법사만 살아남아 있다.', cx: 50, cy: 30 },
+  { num: 'VII', name: '마지막 용의 둥지',           sub: 'Nest of the Last Dragon',      npc: '최후의 용 오닉시아', npcId: 'onixia', desc: '지하 깊숙이 불과 용암이 흐르는 동굴. 이 세계 마지막 용이 세상의 멸망을 지켜보고 있다.', cx: 50, cy: 12 },
+  // VI: 루멘의 협곡 동쪽
+  { num: 'VI',  name: '재와 먼지의 협곡, 루멘',     sub: 'Canyon of Lumen',              npc: '리디아의 출생지',   npcId: 'lydia',   desc: '회색 재로 뒤덮인 과거의 처형장. 하늘은 항상 잿빛 구름으로 가려진다. 곳곳에 망자가 존재한다.', cx: 75, cy: 50 },
+  // IV: 타르토스 남쪽
+  { num: 'IV',  name: '깊은 수면의 항구, 타르토스',  sub: 'Tartos — Port of Deep Sleep',  npc: '해적 선장 루베란', npcId: 'luveran', desc: '짙은 안개 속 저주받은 항구. 유령선들이 검푸른 바다를 표류한다. 한때 왕국의 주요 무역항이었다.', cx: 50, cy: 75 },
 ]
 
 const RANKS = [
@@ -744,7 +749,7 @@ const CHARS_MAIN: CharType[] = [
   { id: 'muzeley', name: '뮤즈레이', nameEn: 'Muzeley', title: '방랑하는 상인', rank: '측정불가', rankCls: '', rankColor: '#888',
     // 표면 정보 (가짜)
     species: '불명', gender: '여성', birth: '814.09.14 (자칭)',
-    app: '보라색 머리카락, 금빛 눈동자',
+    app: '하늘색 머리카락, 금빛 눈동자',
     ability: '거래술',
     abilityDesc: '세계 각지를 돌아다니며 물건을 사고판다. 항상 공정해 보이지만 묘하게 찝찝한 뒷맛을 남긴다.',
     personality: '쾌활·밝음·친절함·낙천적. 항상 웃는 얼굴. 반말, 밝고 경쾌한 어조.',
@@ -941,7 +946,15 @@ function WorldSection() {
 
 function RegionsSection() {
   const mapW = 400, mapH = 380
-  const conns = [[50, 50, 50, 10], [50, 50, 12, 45], [50, 50, 88, 50], [50, 50, 50, 85], [50, 50, 50, 18], [12, 45, 18, 10], [50, 18, 88, 18]]
+  // 루인하르트(III)를 기준으로 동서남북/특수 지점 연결
+  const conns = [
+    [50, 50, 25, 50], // 루인하르트 - 에델가르드(서)
+    [50, 50, 10, 45], // 에델가르드 - 희망의 제단(더 서쪽)
+    [50, 50, 75, 50], // 루인하르트 - 루멘의 협곡(동)
+    [50, 50, 50, 75], // 루인하르트 - 타르토스(남)
+    [50, 50, 50, 30], // 루인하르트 - 아스테리아(북)
+    [50, 30, 50, 12], // 아스테리아 - 마지막 용의 둥지(더 북쪽)
+  ]
   const allChars = [...CHARS_MAIN, ...CHARS_UNDEAD]
   const [selRegion, setSelRegion] = useState<typeof REGIONS[0] | null>(null)
   const [selChar, setSelChar] = useState<CharType | null>(null)
@@ -995,7 +1008,7 @@ function RegionsSection() {
                         : <rect x={x - 7} y={y - 7} width="14" height="14" fill={isSelected ? 'rgba(58,106,238,0.8)' : 'rgba(10,26,106,0.5)'} stroke={isSelected ? '#88aaff' : '#3a6aee'} strokeWidth="1.5" transform={`rotate(45 ${x} ${y})`} />
                       }
                       <text x={x} y={y + (r.cy > 50 ? -20 : 22)} textAnchor="middle" fill={isCenter ? '#cc2020' : 'rgba(58,106,238,0.7)'} fontSize="11" fontFamily="Cinzel, serif" letterSpacing="0.05em">
-                        {r.name.split(',')[0].split(' ').slice(-1)[0].slice(0, 5)}
+                        {r.name}
                       </text>
                     </g>
                   )
@@ -1415,6 +1428,7 @@ function Footer() {
       <div className="footer-divider-v" />
       <div className="footer-pane">
         <div className="footer-credit">Made by Kunio</div>
+        <div className="footer-credit">Website created by 몽유도인</div>
       </div>
       <div className="footer-divider-v" />
       <div className="footer-pane">
