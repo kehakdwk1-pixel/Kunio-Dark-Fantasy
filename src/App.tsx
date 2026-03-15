@@ -321,33 +321,33 @@ const BGM_CSS = `
 ══════════════════════════════════════ */
 .card-stage-tabs {
   position: absolute;
-  top: 0.55rem; left: 50%;
-  transform: translateX(-50%);
+  top: 0.55rem; right: 0.55rem;
   z-index: 10;
   display: flex;
   gap: 0;
   border: 1px solid rgba(139,10,26,0.5);
   overflow: hidden;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 .card-stage-tab {
   font-family: 'Cinzel', serif;
-  font-size: 0.46rem;
+  font-size: 0.62rem;
   letter-spacing: 0.1em;
-  padding: 0.22rem 0.55rem;
-  background: rgba(4,3,2,0.75);
+  padding: 0.28rem 0.65rem;
+  background: rgba(4,3,2,0.85);
   border: none;
   border-right: 1px solid rgba(139,10,26,0.4);
-  color: var(--text-dim);
+  color: var(--text-glass);
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
   white-space: nowrap;
 }
 .card-stage-tab:last-child { border-right: none; }
-.card-stage-tab:hover { background: rgba(139,10,26,0.2); color: var(--text-glass); }
+.card-stage-tab:hover { background: rgba(139,10,26,0.3); color: #fff; }
 .card-stage-tab.active {
-  background: rgba(139,10,26,0.45);
+  background: rgba(139,10,26,0.6);
   color: #fff;
+  text-shadow: 0 0 8px rgba(204,26,42,0.5);
 }
 
 /* ══════════════════════════════════════
@@ -364,22 +364,23 @@ const BGM_CSS = `
 }
 .modal-stage-tab {
   font-family: 'Cinzel', serif;
-  font-size: 0.54rem;
+  font-size: 0.7rem;
   letter-spacing: 0.12em;
-  padding: 0.3rem 0.85rem;
-  background: rgba(4,3,2,0.8);
+  padding: 0.35rem 1rem;
+  background: rgba(4,3,2,0.88);
   border: none;
   border-right: 1px solid rgba(139,10,26,0.4);
-  color: var(--text-dim);
+  color: var(--text-glass);
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
   white-space: nowrap;
 }
 .modal-stage-tab:last-child { border-right: none; }
-.modal-stage-tab:hover { background: rgba(139,10,26,0.25); color: #ddd; }
+.modal-stage-tab:hover { background: rgba(139,10,26,0.3); color: #fff; }
 .modal-stage-tab.active {
-  background: rgba(139,10,26,0.5);
+  background: rgba(139,10,26,0.55);
   color: #fff;
+  text-shadow: 0 0 8px rgba(204,26,42,0.5);
 }
 
 /* 이미지 전환 페이드 */
@@ -867,7 +868,21 @@ const BGM_CSS = `
   to   { opacity: 1; }
 }
 
-/* ── 전투력 체계 가독성 보정 ── */
+/* ── 카드 그리드 마지막 줄 정렬 보정 ── */
+.char-reliquary {
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)) !important;
+  justify-items: stretch;
+}
+/* 마지막 줄 카드가 혼자 남을 때 최대 너비 제한 */
+.char-reliquary .relic-card:last-child:nth-child(3n - 2) {
+  grid-column: span 1;
+  max-width: 100%;
+}
+/* 빈 자리 채우기용 가상 요소 — 카드가 늘어나지 않게 */
+.char-reliquary::after {
+  content: '';
+  grid-column: span 1;
+}
 /* rgr-en: text-faint(#251e16) → text-dim */
 .rgr-en { color: var(--text-dim) !important; }
 
@@ -1053,12 +1068,12 @@ const CHARS_MAIN: CharType[] = [
 
 const CHARS_UNDEAD: CharType[] = [
   { id: 'grandius', name: '그란디우스', nameEn: 'Grandius', title: '마지막 왕', rank: '신흔', rankCls: 'rg-god', rankColor: '#8a6010', species: '망자', gender: '남성', birth: '루인하르트', app: '거대한 갑주를 입은 왕의 형상', ability: '타락한 운명의 검', abilityDesc: "카라의 '운명의 검'과 유사하나 검붉은 색. 망자가 아닌 살아있는 인간을 대상으로 한다.", personality: '실패한 집념으로 망자화되었다.', lore: '최초로 제단 의식을 치르려 했으나 실패한 왕. 실패의 집념이 그를 망자로 만든 비극적 존재다.', traits: ['실패한 집념', '왕국의 마지막 숨결'], hopeShard: null, icon: '👁', glassColor: 'rgba(50,20,0,0.55)', type: '망자 등장인물' },
+  { id: 'arcael', name: '아르카엘', nameEn: 'Arcael', title: '거짓된 심판자', rank: '광흔', rankCls: 'rg-mad', rankColor: '#8a0f0f', species: '망자 처형자', gender: '남성', birth: '500년 전', app: '검붉은 쇠사슬로 꿰매진 육체, 검은 처형자 예복, 피로 물든 금빛 왕관, 검붉은 안개가 망토 형상', ability: '사형 선고', abilityDesc: '선고를 받은 대상은 속도가 현저히 저하되고 상처가 자연 치유되지 않는다. 거대한 낫을 소지한다.', personality: '이성 왜곡. 망자와 인간 구분 없이 처형한다.', lore: '500년 전 왕국의 처형자. 루인하르트와 루멘의 협곡 사이를 돌아다니며 모든 것을 처형한다.', traits: ['처형의 본능', '무차별 심판'], hopeShard: null, icon: '☠', glassColor: 'rgba(40,5,5,0.55)', type: '망자 등장인물' },
+  { id: 'irenia', name: '이레니아', nameEn: 'Irenia', title: '절망의 기사', rank: '광흔', rankCls: 'rg-mad', rankColor: '#8a0f0f', species: '망자 기사', gender: '여성', birth: '500년 전', app: '칠흑의 갑주, 틈새로 검붉은 빛, 등 뒤에 부서진 검은 날개 형상', ability: '절망의 영역', abilityDesc: '일정 반경 내 모든 움직임을 감지한다. 갑주를 분해하여 검은 가시나 쇠사슬로 공격한다.', personality: '자아의 잔재가 남아 전투 중 동요하거나 멈추는 순간이 있다.', lore: '500년 전 왕국 최강의 기사. 이성의 편린이 남아있어 스스로를 증오하면서도 멈추지 못한다.', traits: ['왕국 최강의 잔영', '남은 자아의 비극'], hopeShard: null, icon: '⚔', glassColor: 'rgba(50,5,5,0.55)', type: '망자 등장인물' },
   { id: 'pilgrim', name: '순례자', nameEn: 'Pilgrim', title: '방랑형 망자', rank: '각흔~열흔', rankCls: 'rg-carve', rankColor: '#2e4050', species: '망자', gender: '불명', birth: '루멘의 협곡', app: '회색 재로 뒤덮인 인간형', ability: '개체마다 상이', abilityDesc: '각 개체마다 서로 다른 능력을 지닌다. 무엇이 나타날지 알 수 없다는 점이 더욱 위험하다.', personality: '이성 소실. 목적지를 잃었으나 발걸음만은 멈추지 않는다.', lore: '루멘의 협곡에서 출몰하는 망자들. 재에 뒤덮여 협곡의 일부처럼 보인다.', traits: ['잃어버린 목적', '루멘의 협곡'], hopeShard: null, icon: '🧟', glassColor: 'rgba(20,20,20,0.55)', type: '망자 등장인물' },
   { id: 'drowned', name: '익사자', nameEn: 'Drowned', title: '수중형 망자', rank: '각흔~열흔', rankCls: 'rg-carve', rankColor: '#2e4050', species: '망자', gender: '불명', birth: '타르토스', app: '검푸른 피부, 갑각류 기생', ability: '수중 압도적 기동력', abilityDesc: '수중에서 압도적인 기동력. 타르토스의 바다를 전장으로 삼는다.', personality: '이성 소실. 선원이었던 흔적만 남아있다.', lore: '과거 타르토스 선원들이 망자화된 존재. 바다 속을 자유롭게 유영하며 항구를 봉쇄한다.', traits: ['수중 공포', '타르토스의 지배자'], hopeShard: null, icon: '🌊', glassColor: 'rgba(5,15,40,0.55)', type: '망자 등장인물' },
   { id: 'failure', name: '실패자', nameEn: 'Failure', title: '탑의 부품', rank: '심흔~열흔', rankCls: 'rg-deep', rankColor: '#6a4e18', species: '망자', gender: '불명', birth: '아스테리아', app: '육체가 보라색 마법 수정과 융합', ability: '각종 마법', abilityDesc: '생전에 익힌 마법들을 타락한 형태로 사용한다. 수정 융합 육체로 물리 공격이 통하지 않기도 한다.', personality: '이성 소실. 탑의 구조물과 일부 융합된 상태.', lore: '저주의 압박을 견디지 못하고 망자가 된 마법사들. 보라색 수정과 육체가 융합되었다.', traits: ['탑의 구조물', '엘라의 트라우마'], hopeShard: null, icon: '💜', glassColor: 'rgba(30,5,50,0.55)', type: '망자 등장인물' },
   { id: 'assimilator', name: '동화자', nameEn: 'Assimilator', title: '숲의 일부', rank: '각흔~열흔', rankCls: 'rg-carve', rankColor: '#2e4050', species: '망자', gender: '불명', birth: '에델가르드', app: '인간이 나무줄기와 융합된 형태', ability: '뿌리 공격', abilityDesc: '평소에는 나무처럼 완전히 정지해 있다가, 생자가 일정 거리 접근 시 뿌리로 공격한다.', personality: '이성 완전 소실. 나무와의 경계가 없다.', lore: '에델가르드의 안개에 정신을 잃고 나무와 융합된 망자들. 일반 나무와 구분이 불가능하다.', traits: ['위장 매복', '식물 융합체'], hopeShard: null, icon: '🌳', glassColor: 'rgba(5,30,5,0.55)', type: '망자 등장인물' },
-  { id: 'irenia', name: '이레니아', nameEn: 'Irenia', title: '절망의 기사', rank: '광흔', rankCls: 'rg-mad', rankColor: '#8a0f0f', species: '망자 기사', gender: '여성', birth: '500년 전', app: '칠흑의 갑주, 틈새로 검붉은 빛, 등 뒤에 부서진 검은 날개 형상', ability: '절망의 영역', abilityDesc: '일정 반경 내 모든 움직임을 감지한다. 갑주를 분해하여 검은 가시나 쇠사슬로 공격한다.', personality: '자아의 잔재가 남아 전투 중 동요하거나 멈추는 순간이 있다.', lore: '500년 전 왕국 최강의 기사. 이성의 편린이 남아있어 스스로를 증오하면서도 멈추지 못한다.', traits: ['왕국 최강의 잔영', '남은 자아의 비극'], hopeShard: null, icon: '⚔', glassColor: 'rgba(50,5,5,0.55)', type: '망자 등장인물' },
-  { id: 'arcael', name: '아르카엘', nameEn: 'Arcael', title: '거짓된 심판자', rank: '광흔', rankCls: 'rg-mad', rankColor: '#8a0f0f', species: '망자 처형자', gender: '남성', birth: '500년 전', app: '검붉은 쇠사슬로 꿰매진 육체, 검은 처형자 예복, 피로 물든 금빛 왕관, 검붉은 안개가 망토 형상', ability: '사형 선고', abilityDesc: '선고를 받은 대상은 속도가 현저히 저하되고 상처가 자연 치유되지 않는다. 거대한 낫을 소지한다.', personality: '이성 왜곡. 망자와 인간 구분 없이 처형한다.', lore: '500년 전 왕국의 처형자. 루인하르트와 루멘의 협곡 사이를 돌아다니며 모든 것을 처형한다.', traits: ['처형의 본능', '무차별 심판'], hopeShard: null, icon: '☠', glassColor: 'rgba(40,5,5,0.55)', type: '망자 등장인물' },
 ]
 
 const HOPE_SHARDS = [
@@ -1643,26 +1658,39 @@ function CharModal({ char, onClose }: { char: CharType | null; onClose: () => vo
     }
   }, [char, onClose])
 
+  // ── ESC 키로 닫기 ──
+  useEffect(() => {
+    if (!char) return
+    const handleKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [char, onClose])
+
   if (!char) return null
-  const rankColors: Record<string, string> = { 'rg-god': '#3a2a08', 'rg-mad': '#380606', 'rg-crack': '#1c2830', 'rg-deep': '#2e200a', 'rg-carve': '#181e20', '': '#222' }
-  const rc = rankColors[char.rankCls] ?? '#222'
+
+  // 모달 등급 텍스트 색상 — 배경과 분리되도록 밝게
+  const rankTextColors: Record<string, string> = { 'rg-god': '#c89030', 'rg-mad': '#cc2020', 'rg-crack': '#6090b8', 'rg-deep': '#a07828', 'rg-carve': '#5a7888', '': '#888' }
+  const rankTc = rankTextColors[char.rankCls] ?? '#888'
 
   // 리디아 성장 단계
   const defaultStage = char.stages ? char.stages[char.stages.length - 1] : null
   const [stageKey, setStageKey] = useState(defaultStage?.key ?? '')
   const currentStage = char.stages?.find((s) => s.key === stageKey) ?? defaultStage
 
-  // 뮤즈레이 본모습 — 키워드 잠금
+  // 뮤즈레이 본모습 — 키워드 잠금 (localStorage 영속)
   const [showTrue, setShowTrue] = useState(false)
   const [keyword, setKeyword] = useState('')
   const [keywordError, setKeywordError] = useState(false)
-  const [unlocked, setUnlocked] = useState(false)
+  const [unlocked, setUnlocked] = useState(() =>
+    char.hiddenData ? localStorage.getItem('muzeley_unlocked') === 'true' : false
+  )
 
   const tryUnlock = () => {
     if (keyword.replace(/\s/g, '') === '메리수') {
       setUnlocked(true)
       setShowTrue(true)
       setKeywordError(false)
+      localStorage.setItem('muzeley_unlocked', 'true')
     } else {
       setKeywordError(true)
       setTimeout(() => setKeywordError(false), 1200)
@@ -1789,7 +1817,7 @@ function CharModal({ char, onClose }: { char: CharType | null; onClose: () => vo
                 <div className="mstat"><strong>종족</strong>{char.species}</div>
                 <div className="mstat"><strong>성별</strong>{char.gender}</div>
                 <div className="mstat full"><strong>출생</strong>{char.birth}</div>
-                {char.rank !== '측정불가' && <div className="mstat"><strong>등급</strong><span style={{ color: rc }}>{char.rank}</span></div>}
+                {char.rank !== '측정불가' && <div className="mstat"><strong>등급</strong><span style={{ color: rankTc }}>{char.rank}</span></div>}
                 {char.hopeShard && <div className="mstat"><strong style={{ color: '#0e5a22' }}>조각</strong><span style={{ color: '#0e5a22' }}>「{char.hopeShard}」</span></div>}
                 <div className={`mstat${!char.hopeShard && char.rank === '측정불가' ? ' full' : ''}`} style={{ gridColumn: '1/-1' }}><strong>외형</strong>{char.app}</div>
               </div>
@@ -1978,12 +2006,16 @@ export default function App() {
   const [entered, setEntered] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
   const [userName, setUserName] = useState('')
-  const [bgmOn, setBgmOn] = useState(false)
+  // localStorage에서 BGM 상태 복원
+  const [bgmOn, setBgmOn] = useState(() => localStorage.getItem('bgm') === 'on')
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const handleEnter = useCallback((n: string, bgmStarted?: boolean) => {
     setUserName(n)
-    if (bgmStarted) setBgmOn(true)
+    if (bgmStarted) {
+      setBgmOn(true)
+      localStorage.setItem('bgm', 'on')
+    }
     setShowIntro(true)
   }, [])
 
@@ -2000,8 +2032,12 @@ export default function App() {
     if (bgmOn) {
       audio.pause()
       setBgmOn(false)
+      localStorage.setItem('bgm', 'off')
     } else {
-      audio.play().then(() => setBgmOn(true)).catch(() => {})
+      audio.play().then(() => {
+        setBgmOn(true)
+        localStorage.setItem('bgm', 'on')
+      }).catch(() => {})
     }
   }, [bgmOn])
 

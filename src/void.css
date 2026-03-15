@@ -837,8 +837,8 @@ body {
 }
 .hope-shard-name { font-family: 'Cinzel Decorative', serif; font-size: 0.9rem; color: var(--hope-accent, var(--violet-l)); margin-bottom: 0.2rem; position: relative; z-index: 1; }
 .hope-shard-en { font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.25em; color: var(--text-faint); text-transform: uppercase; margin-bottom: 0.5rem; position: relative; z-index: 1; }
-.hope-shard-holder { font-family: 'Libre Baskerville', serif; font-size: 0.8rem; font-style: italic; color: var(--text-dim); margin-bottom: 0.5rem; position: relative; z-index: 1; }
-.hope-shard-quote { font-family: 'Libre Baskerville', serif; font-size: 0.72rem; font-style: italic; color: var(--hope-accent, var(--violet-l)); opacity: 0.65; line-height: 1.55; position: relative; z-index: 1; }
+.hope-shard-holder { font-family: 'Libre Baskerville', serif; font-size: 0.85rem; font-style: italic; color: var(--text-dim); margin-bottom: 0.5rem; position: relative; z-index: 1; }
+.hope-shard-quote { font-family: 'Libre Baskerville', serif; font-size: 0.80rem; font-style: italic; color: var(--hope-accent, var(--violet-l)); opacity: 0.65; line-height: 1.55; position: relative; z-index: 1; }
 
 .hope-altar {
   margin-top: 3rem; border: 2px solid var(--lead-line);
