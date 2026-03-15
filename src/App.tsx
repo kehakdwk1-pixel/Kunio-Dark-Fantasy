@@ -17,6 +17,191 @@ const BGM_CSS = `
   align-items: stretch;
 }
 
+/* ══════════════════════════════════════
+   Nav 섹션 하이라이트
+   — void.css의 nth-child 언더라인에 맞춰 active 강화
+══════════════════════════════════════ */
+/* active 시 ::before 라인을 즉시 펼침 */
+.nav-links a.nav-link-active::before {
+  transform: scaleX(1) !important;
+  opacity: 1;
+}
+/* active 텍스트 밝기 */
+.nav-links li:nth-child(1) a.nav-link-active { color: var(--ruby-l); }
+.nav-links li:nth-child(2) a.nav-link-active { color: var(--sapphire-l); }
+.nav-links li:nth-child(3) a.nav-link-active { color: var(--amber-l); }
+.nav-links li:nth-child(4) a.nav-link-active { color: var(--emerald-l); }
+.nav-links li:nth-child(5) a.nav-link-active { color: var(--violet-l); }
+
+/* 섹션별 컬러 보석 */
+.nav-link-gem {
+  display: inline-block;
+  width: 4px; height: 4px;
+  transform: rotate(45deg);
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: gem-pop 0.3s ease;
+}
+.nav-links li:nth-child(1) .nav-link-gem { background: var(--ruby-l);     box-shadow: 0 0 5px var(--ruby-l); }
+.nav-links li:nth-child(2) .nav-link-gem { background: var(--sapphire-l); box-shadow: 0 0 5px var(--sapphire-l); }
+.nav-links li:nth-child(3) .nav-link-gem { background: var(--amber-l);    box-shadow: 0 0 5px var(--amber-l); }
+.nav-links li:nth-child(4) .nav-link-gem { background: var(--emerald-l);  box-shadow: 0 0 5px var(--emerald-l); }
+.nav-links li:nth-child(5) .nav-link-gem { background: var(--violet-l);   box-shadow: 0 0 5px var(--violet-l); }
+@keyframes gem-pop {
+  from { transform: rotate(45deg) scale(0); opacity: 0; }
+  to   { transform: rotate(45deg) scale(1); opacity: 1; }
+}
+
+/* ══════════════════════════════════════
+   햄버거 버튼
+══════════════════════════════════════ */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--lead-line);
+  cursor: pointer;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--text-dim);
+  border-radius: 1px;
+  transition: transform 0.3s, opacity 0.3s, background 0.3s;
+  transform-origin: center;
+}
+.nav-hamburger:hover span { background: var(--ruby-l); }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--ruby-l); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--ruby-l); }
+
+/* ══════════════════════════════════════
+   모바일 드로어 메뉴
+══════════════════════════════════════ */
+.nav-mobile-drawer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.65);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  backdrop-filter: blur(3px);
+}
+.nav-mobile-drawer.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.nav-mobile-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: min(280px, 80vw);
+  height: 100%;
+  background: rgba(3,2,2,0.98);
+  border-left: 2px solid var(--lead-line);
+  box-shadow: -6px 0 40px rgba(0,0,0,0.9);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: flex;
+  flex-direction: column;
+}
+.nav-mobile-drawer.open .nav-mobile-panel {
+  transform: translateX(0);
+}
+.nav-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.2rem 1rem;
+  border-bottom: 2px solid var(--lead-line);
+  background: var(--ruby-g);
+}
+.nav-mobile-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: var(--text-glass);
+}
+.nav-mobile-close {
+  background: transparent;
+  border: 1px solid rgba(90,6,16,0.4);
+  color: var(--text-dim);
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.nav-mobile-close:hover { background: var(--ruby-g); color: var(--ruby-l); border-color: var(--ruby); }
+.nav-mobile-links {
+  list-style: none;
+  padding: 0.6rem 0;
+  margin: 0;
+  flex: 1;
+}
+.nav-mobile-links li a {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.4rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-glass);
+  text-decoration: none;
+  border-bottom: 1px solid var(--lead-line);
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+.nav-mobile-links li a:hover {
+  background: rgba(90,6,16,0.06);
+  color: #fff;
+  padding-left: 1.8rem;
+}
+/* 섹션별 active 색상 */
+.nav-mobile-links li:nth-child(1) a.active { color: var(--ruby-l);     border-left: 2px solid var(--ruby-l);     background: var(--ruby-g); }
+.nav-mobile-links li:nth-child(2) a.active { color: var(--sapphire-l); border-left: 2px solid var(--sapphire-l); background: var(--sapphire-g); }
+.nav-mobile-links li:nth-child(3) a.active { color: var(--amber-l);    border-left: 2px solid var(--amber-l);    background: var(--amber-g); }
+.nav-mobile-links li:nth-child(4) a.active { color: var(--emerald-l);  border-left: 2px solid var(--emerald-l);  background: var(--emerald-g); }
+.nav-mobile-links li:nth-child(5) a.active { color: var(--violet-l);   border-left: 2px solid var(--violet-l);   background: var(--violet-g); }
+.nml-gem {
+  font-size: 0.52rem;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.nav-mobile-links li:nth-child(1) a.active .nml-gem { color: var(--ruby-l); }
+.nav-mobile-links li:nth-child(2) a.active .nml-gem { color: var(--sapphire-l); }
+.nav-mobile-links li:nth-child(3) a.active .nml-gem { color: var(--amber-l); }
+.nav-mobile-links li:nth-child(4) a.active .nml-gem { color: var(--emerald-l); }
+.nav-mobile-links li:nth-child(5) a.active .nml-gem { color: var(--violet-l); }
+.nav-mobile-user {
+  padding: 1rem 1.4rem;
+  border-top: 2px solid var(--lead-line);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+/* ══════════════════════════════════════
+   반응형 — void.css 680px breakpoint에 통일
+══════════════════════════════════════ */
+@media (max-width: 680px) {
+  /* void.css에 이미 .nav-links { display:none } 있음 — 햄버거 보이기만 추가 */
+  .nav-hamburger { display: flex !important; }
+  .nav-mobile-drawer { display: block; }
+}
+
 /* ── BGM 버튼 전체 ── */
 .nav-bgm-btn {
   position: relative;
@@ -25,7 +210,7 @@ const BGM_CSS = `
   gap: 8px;
   padding: 0 1.4rem;
   border: none;
-  border-left: 2px solid var(--lead-line, #1a1a1a);
+  border-left: 2px solid var(--lead-line);
   background: transparent;
   cursor: pointer;
   transition: background 0.4s;
@@ -63,7 +248,7 @@ const BGM_CSS = `
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  background: var(--text-dim, #9a8a70);
+  background: var(--text-dim);
   transition: background 0.4s, box-shadow 0.4s;
 }
 .nav-bgm-btn.active .bgm-gem {
@@ -102,7 +287,7 @@ const BGM_CSS = `
   width: 2px;
   height: 4px;
   border-radius: 1px;
-  background: var(--text-dim, #9a8a70);
+  background: var(--text-dim);
   transition: background 0.4s;
 }
 .nav-bgm-btn.active .bgm-bar { background: #cc1a2a; }
@@ -122,7 +307,7 @@ const BGM_CSS = `
   font-family: 'Cinzel', serif;
   font-size: 0.52rem;
   letter-spacing: 0.22em;
-  color: var(--text-dim, #9a8a70);
+  color: var(--text-dim);
   transition: color 0.4s, text-shadow 0.4s;
   white-space: nowrap;
 }
@@ -153,13 +338,13 @@ const BGM_CSS = `
   background: rgba(4,3,2,0.75);
   border: none;
   border-right: 1px solid rgba(139,10,26,0.4);
-  color: var(--text-dim, #9a8a70);
+  color: var(--text-dim);
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
   white-space: nowrap;
 }
 .card-stage-tab:last-child { border-right: none; }
-.card-stage-tab:hover { background: rgba(139,10,26,0.2); color: var(--chisel, #c8baa0); }
+.card-stage-tab:hover { background: rgba(139,10,26,0.2); color: var(--text-glass); }
 .card-stage-tab.active {
   background: rgba(139,10,26,0.45);
   color: #fff;
@@ -185,7 +370,7 @@ const BGM_CSS = `
   background: rgba(4,3,2,0.8);
   border: none;
   border-right: 1px solid rgba(139,10,26,0.4);
-  color: var(--text-dim, #9a8a70);
+  color: var(--text-dim);
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
   white-space: nowrap;
@@ -242,29 +427,30 @@ const BGM_CSS = `
   z-index: 10;
   display: flex;
   align-items: stretch;
-  border: 1px solid rgba(138,42,204,0.4);
+  border: 1px solid rgba(90,6,16,0.6);
   overflow: hidden;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 .modal-keyword-input {
   font-family: 'Cinzel', serif;
-  font-size: 0.52rem;
-  letter-spacing: 0.12em;
-  padding: 0.3rem 0.7rem;
-  width: 110px;
-  background: rgba(20,5,35,0.85);
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  padding: 0.35rem 0.8rem;
+  width: 120px;
+  background: rgba(8,3,3,0.92);
   border: none;
-  color: rgba(200,160,255,0.9);
+  color: var(--text-glass);
   outline: none;
   transition: background 0.3s;
-  caret-color: rgba(200,160,255,0.9);
+  caret-color: var(--ruby-l);
 }
 .modal-keyword-input::placeholder {
-  color: rgba(138,42,204,0.45);
+  color: var(--text-dim);
   letter-spacing: 0.1em;
+  font-style: italic;
 }
 .modal-keyword-input.error {
-  background: rgba(80,5,5,0.9);
+  background: rgba(60,3,3,0.95);
   animation: keyword-shake 0.3s ease;
 }
 @keyframes keyword-shake {
@@ -273,18 +459,18 @@ const BGM_CSS = `
   75%     { transform: translateX(4px); }
 }
 .modal-keyword-btn {
-  padding: 0.3rem 0.6rem;
-  background: rgba(74,10,122,0.7);
+  padding: 0.35rem 0.7rem;
+  background: var(--ruby-g);
   border: none;
-  border-left: 1px solid rgba(138,42,204,0.4);
-  color: rgba(200,160,255,0.8);
+  border-left: 1px solid rgba(90,6,16,0.5);
+  color: var(--text-dim);
   cursor: pointer;
   font-size: 0.8rem;
   transition: background 0.2s, color 0.2s;
 }
 .modal-keyword-btn:hover {
-  background: rgba(138,42,204,0.6);
-  color: #fff;
+  background: rgba(90,6,16,0.5);
+  color: var(--text-glass);
 }
 
 /* 잠금 안내 힌트 */
@@ -294,24 +480,26 @@ const BGM_CSS = `
   gap: 0.6rem;
   margin-top: 1.2rem;
   padding: 0.7rem 1rem;
-  border: 1px solid rgba(138,42,204,0.25);
-  background: rgba(30,5,50,0.4);
+  border: 1px solid rgba(90,6,16,0.2);
+  border-left: 2px solid rgba(90,6,16,0.4);
+  background: rgba(10,3,3,0.4);
   animation: locked-pulse 3s ease-in-out infinite;
 }
 @keyframes locked-pulse {
-  0%,100% { border-color: rgba(138,42,204,0.2); }
-  50%     { border-color: rgba(138,42,204,0.5); }
+  0%,100% { border-left-color: rgba(90,6,16,0.3); }
+  50%     { border-left-color: rgba(139,10,26,0.7); }
 }
 .modal-locked-icon {
   font-size: 0.85rem;
-  color: rgba(138,42,204,0.7);
+  color: rgba(139,10,26,0.6);
   flex-shrink: 0;
 }
 .modal-locked-hint span:last-child {
-  font-family: 'Cinzel', serif;
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  color: rgba(138,42,204,0.6);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
 }
 
 /* ══════════════════════════════════════
@@ -416,10 +604,19 @@ const BGM_CSS = `
 
 .region-popup {
   margin-top: 1.5rem;
-  border: 1px solid rgba(10,26,106,0.4);
-  background: rgba(4,5,16,0.9);
+  border: 2px solid var(--lead-line);
+  border-top: 2px solid rgba(58,106,238,0.35);
+  background: rgba(3,4,14,0.97);
   overflow: hidden;
   animation: popup-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+.region-popup::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(58,106,238,0.5), transparent);
 }
 @keyframes popup-in {
   from { opacity: 0; transform: translateY(12px); }
@@ -429,36 +626,38 @@ const BGM_CSS = `
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.85rem 1.2rem;
-  border-bottom: 1px solid rgba(10,26,106,0.3);
-  background: rgba(10,26,106,0.08);
+  padding: 0.9rem 1.4rem;
+  border-bottom: 1px solid var(--lead-line);
+  background: rgba(10,26,106,0.1);
 }
 .rp-num {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 1.1rem;
-  color: rgba(58,106,238,0.5);
+  font-size: 1.2rem;
+  color: rgba(58,106,238,0.8);
   flex-shrink: 0;
   min-width: 2rem;
+  text-shadow: 0 0 12px rgba(58,106,238,0.4);
 }
 .rp-title-block { flex: 1; }
 .rp-name {
   font-family: 'Cinzel', serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  color: var(--text-glass, #e8dcc8);
-  margin-bottom: 0.15rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  color: var(--text-glass);
+  margin-bottom: 0.2rem;
 }
 .rp-sub {
   font-family: 'Libre Baskerville', serif;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-style: italic;
-  color: rgba(58,106,238,0.55);
+  color: rgba(58,106,238,0.6);
+  letter-spacing: 0.05em;
 }
 .rp-close {
   background: transparent;
-  border: 1px solid rgba(10,26,106,0.4);
-  color: var(--text-dim, #9a8a70);
-  width: 26px; height: 26px;
+  border: 1px solid var(--lead-line);
+  color: var(--text-dim);
+  width: 28px; height: 28px;
   cursor: pointer;
   font-family: 'Cinzel', serif;
   font-size: 0.7rem;
@@ -467,71 +666,95 @@ const BGM_CSS = `
   display: flex; align-items: center; justify-content: center;
 }
 .rp-close:hover {
-  background: rgba(139,10,26,0.2);
-  color: #cc2020;
-  border-color: #cc2020;
+  background: var(--ruby-g);
+  color: var(--ruby-l);
+  border-color: var(--ruby);
 }
 .rp-body {
-  padding: 1.2rem 1.4rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 1.4rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 260px;
 }
 .rp-desc {
   font-family: 'Libre Baskerville', serif;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-style: italic;
-  color: var(--text-dim, #9a8a70);
-  line-height: 1.8;
-  flex: 1;
+  color: var(--text-dim);
+  line-height: 1.9;
+  padding: 1.4rem 1.6rem;
+  border-right: 2px solid var(--lead-line);
 }
 .rp-char-row {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
   align-items: center;
+  gap: 0;
   flex-shrink: 0;
-  width: 200px;
-  border-left: 1px solid rgba(10,26,106,0.3);
-  padding-left: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
 }
+/* 인물 이미지 — 크게 */
 .rp-char-img {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
   object-position: top;
-  border: 1px solid rgba(10,26,106,0.4);
-  flex-shrink: 0;
+  display: block;
+  filter: brightness(0.85) contrast(1.05);
+  transition: filter 0.4s, transform 0.4s;
 }
-.rp-char-info { flex: 1; }
+.rp-char-row:hover .rp-char-img {
+  filter: brightness(1) contrast(1.05);
+  transform: scale(1.03);
+}
+/* 이미지 위 그라데이션 + 텍스트 오버레이 */
+.rp-char-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2.2rem 1rem 1rem;
+  background: linear-gradient(transparent, rgba(2,2,8,0.98) 55%);
+  text-align: center;
+}
 .rp-char-name {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 0.78rem;
-  color: var(--text-glass, #e8dcc8);
-  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 0 12px rgba(0,0,0,1), 0 1px 4px rgba(0,0,0,1);
 }
 .rp-char-title {
   font-family: 'Libre Baskerville', serif;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-style: italic;
-  color: rgba(204,26,42,0.8);
-  margin-bottom: 0.2rem;
+  color: #ff8080;
+  margin-bottom: 0.35rem;
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(0,0,0,1);
 }
 .rp-char-trait {
   font-family: 'Cinzel', serif;
-  font-size: 0.52rem;
-  letter-spacing: 0.1em;
-  color: rgba(58,106,238,0.55);
-  border: 1px solid rgba(10,26,106,0.3);
-  padding: 0.08rem 0.3rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: #aac0ff;
+  border: 1px solid rgba(58,106,238,0.5);
+  background: rgba(3,4,14,0.85);
+  padding: 0.12rem 0.4rem;
   display: inline-block;
+  text-shadow: none;
 }
 .rp-no-char {
   font-family: 'Cinzel', serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  color: rgba(58,106,238,0.3);
-  padding-left: 1rem;
-  border-left: 1px solid rgba(10,26,106,0.2);
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  color: rgba(58,106,238,0.35);
+  padding: 1.4rem 1.6rem;
+  font-style: italic;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 2px solid var(--lead-line);
 }
 
 /* ══════════════════════════════════════
@@ -643,6 +866,64 @@ const BGM_CSS = `
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* ── 전투력 체계 가독성 보정 ── */
+/* rgr-en: text-faint(#251e16) → text-dim */
+.rgr-en { color: var(--text-dim) !important; }
+
+/* 각 등급 색상 — 검은 배경에서 잘 보이도록 밝게 */
+.rg-god   .rgr-glyph, .rg-god   .rgr-name, .rg-god   .rgr-tag { color: #c89030 !important; }
+.rg-mad   .rgr-glyph, .rg-mad   .rgr-name, .rg-mad   .rgr-tag { color: #cc2020 !important; }
+.rg-crack .rgr-glyph, .rg-crack .rgr-name, .rg-crack .rgr-tag { color: #6090b8 !important; }
+.rg-deep  .rgr-glyph, .rg-deep  .rgr-name, .rg-deep  .rgr-tag { color: #a07828 !important; }
+.rg-carve .rgr-glyph, .rg-carve .rgr-name, .rg-carve .rgr-tag { color: #5a7888 !important; }
+.rg-none  .rgr-glyph, .rg-none  .rgr-name, .rg-none  .rgr-tag { color: #606060 !important; }
+
+/* ── 희망의 조각 가독성 보정 ── */
+/* en 텍스트: text-faint(#251e16)이 검정배경에 묻힘 → text-dim으로 */
+.hope-shard-en     { color: var(--text-dim) !important; opacity: 0.85 !important; }
+/* 소유자명도 살짝 밝게 */
+.hope-shard-holder { color: var(--text-glass) !important; opacity: 0.7 !important; }
+/* 인용구 opacity 올리기 */
+.hope-shard-quote  { opacity: 0.85 !important; }
+
+/* ── 캐릭터 카드 희망의 조각 배지 ── */
+.relic-hope {
+  font-size: 0.72rem !important;
+  color: #2db87a !important;
+  opacity: 1 !important;
+  letter-spacing: 0.15em !important;
+}
+
+/* ── 저주받은 대륙 — 지역 번호/이름 크기 ── */
+.rli-num  { font-size: 0.88rem !important; color: rgba(58,106,238,0.7) !important; }
+.rli-name { font-size: 0.88rem !important; }
+
+/* ══════════════════════════════════════
+   폰트 사이즈 가독성 보정 (void.css 기준)
+   — 8~9px 구간을 11~12px로 올림
+══════════════════════════════════════ */
+
+/* 8px (0.5~0.52rem) → 11px */
+.lore-tile-tag      { font-size: 0.68rem !important; }
+.relic-rank-badge   { font-size: 0.68rem !important; }
+.relic-type-badge   { font-size: 0.66rem !important; }
+.relic-meta-item    { font-size: 0.66rem !important; }
+.modal-trait        { font-size: 0.68rem !important; }
+
+/* 9px (0.56~0.58rem) → 11.5px */
+.nav-links a        { font-size: 0.72rem !important; }
+.hero-glass-badge   { font-size: 0.72rem !important; }
+.lh-eyebrow         { font-size: 0.7rem  !important; }
+.rgr-tag            { font-size: 0.7rem  !important; }
+.relic-skill-name   { font-size: 0.72rem !important; }
+.mstat strong       { font-size: 0.72rem !important; }
+.modal-sec-label    { font-size: 0.74rem !important; }
+
+/* 10px (0.6~0.65rem) → 12px */
+.glass-btn          { font-size: 0.76rem !important; }
+.glass-table th     { font-size: 0.76rem !important; }
+.rank-fg            { font-size: 0.78rem !important; }
 `
 
 export interface CharStage {
@@ -711,7 +992,7 @@ const MAGIC_ROWS = [
 
 const REGIONS = [
   // II: 에델가르드 서쪽, I: 희망의 제단은 에델가르드 더 서쪽
-  { num: 'I',   name: '희망의 제단',               sub: 'Altar of Hope',               npc: '최종 목적지',         npcId: null,      desc: '만년설 산맥 정상. 세계의 저주를 끝낼 수 있는 유일한 장소. 세 가지 방법 중 하나를 선택해야 한다.', cx: 10, cy: 45 },
+  { num: 'I',   name: '희망의 제단',               sub: 'Altar of Hope',               npc: '최종 목적지',         npcId: null,      desc: '만년설 산맥 정상. 세계의 저주를 끝낼 수 있는 유일한 장소. 세 가지 방법 중 하나를 선택해야 한다.', cx: 8, cy: 50 },
   { num: 'II',  name: '에델가르드',      sub: 'Edelgard — Forest of Silence', npc: '요정 아이린',         npcId: 'irin',    desc: '안개가 정신을 갉아먹어 소실을 유도하는 울창한 숲. 나무와 융합된 망자들이 도사리고 있다.', cx: 25, cy: 50 },
   // III: 루인하르트 중앙
   { num: 'III', name: '루인하르트', sub: 'Ruinhart — Ashen Walled City', npc: '왕 카라',            npcId: 'kara',    desc: '과거 왕국의 수도. 지금은 도박장과 시체가 뒤섞인 타락한 도시. 지하수로에는 반인반괴들이 숨어 산다.', cx: 50, cy: 50 },
@@ -781,24 +1062,40 @@ const CHARS_UNDEAD: CharType[] = [
 ]
 
 const HOPE_SHARDS = [
-  { name: '믿음', en: 'Faith', holder: '아이린', quote: '의심하지 않는 자만이 진실에 닿는다', c1: '#3e1575', c2: 'rgba(25,5,55,0.95)', glass: 'rgba(45,10,90,0.12)' },
-  { name: '지혜', en: 'Wisdom', holder: '엘라', quote: '아는 자는 두려움을 이길 수 있다', c1: '#102080', c2: 'rgba(5,10,55,0.95)', glass: 'rgba(10,20,90,0.12)' },
-  { name: '의지', en: 'Will', holder: '카라', quote: '꺾이지 않는 자에게 절망은 스승이 된다', c1: '#804e10', c2: 'rgba(45,20,0,0.95)', glass: 'rgba(90,50,0,0.1)' },
-  { name: '투지', en: 'Fortitude', holder: '루베란', quote: '살아남는 것, 그것이 곧 승리다', c1: '#106050', c2: 'rgba(3,35,28,0.95)', glass: 'rgba(5,70,45,0.1)' },
-  { name: '자애', en: 'Benevolence', holder: '오닉시아', quote: '수천 년의 사랑은 세계보다 깊다', c1: '#805210', c2: 'rgba(45,25,0,0.95)', glass: 'rgba(100,55,0,0.1)' },
+  { name: '믿음', en: 'Faith', holder: '아이린', quote: '의심하지 않는 자만이 진실에 닿는다', c1: '#7a3abf', c2: 'rgba(25,5,55,0.95)', glass: 'rgba(45,10,90,0.12)' },
+  { name: '지혜', en: 'Wisdom', holder: '엘라', quote: '아는 자는 두려움을 이길 수 있다', c1: '#2a4ab0', c2: 'rgba(5,10,55,0.95)', glass: 'rgba(10,20,90,0.12)' },
+  { name: '의지', en: 'Will', holder: '카라', quote: '꺾이지 않는 자에게 절망은 스승이 된다', c1: '#b06a1a', c2: 'rgba(45,20,0,0.95)', glass: 'rgba(90,50,0,0.1)' },
+  { name: '투지', en: 'Fortitude', holder: '루베란', quote: '살아남는 것, 그것이 곧 승리다', c1: '#1a8a6a', c2: 'rgba(3,35,28,0.95)', glass: 'rgba(5,70,45,0.1)' },
+  { name: '자애', en: 'Benevolence', holder: '오닉시아', quote: '수천 년의 사랑은 세계보다 깊다', c1: '#b07020', c2: 'rgba(45,25,0,0.95)', glass: 'rgba(100,55,0,0.1)' },
 ]
 
 /* ═══════════════════════ COMPONENTS ═══════════════════════ */
 
-function LoadingScreen({ onEnter }: { onEnter: (name: string) => void }) {
+function LoadingScreen({ onEnter, audioRef }: { onEnter: (name: string, bgmStarted?: boolean) => void; audioRef: React.RefObject<HTMLAudioElement> }) {
   const [out, setOut] = useState(false)
+  const [ready, setReady] = useState(false)
+
   useEffect(() => {
-    const t = setTimeout(() => {
-      setOut(true)
-      setTimeout(() => onEnter(''), 1200)
-    }, 1800)
+    const t = setTimeout(() => setReady(true), 1000)
     return () => clearTimeout(t)
-  }, [onEnter])
+  }, [])
+
+  const handleEnterClick = () => {
+    // 사용자 클릭 타이밍 = 브라우저가 BGM 재생을 허용하는 유일한 시점
+    const audio = audioRef.current
+    let bgmStarted = false
+    if (audio) {
+      audio.volume = 0.35
+      audio.loop = true
+      audio.play()
+        .then(() => { /* bgmOn은 onEnter에서 처리 */ })
+        .catch(() => {})
+      bgmStarted = true
+    }
+    setOut(true)
+    setTimeout(() => onEnter('', bgmStarted), 1200)
+  }
+
   return (
     <div className={`ls${out ? ' out' : ''}`}>
       <div className="ls-logo-wrap">
@@ -812,6 +1109,27 @@ function LoadingScreen({ onEnter }: { onEnter: (name: string) => void }) {
         <div className="ls-div-gem" />
         <div className="ls-div-line r" />
       </div>
+      <p className="ls-prompt">♪ BGM이 포함된 사이트입니다</p>
+      <button
+        type="button"
+        className="ls-btn"
+        style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.8s', pointerEvents: ready ? 'auto' : 'none' }}
+        onClick={handleEnterClick}
+      >
+        <span>⬧ 세계로 들어가기 ⬧</span>
+      </button>
+      <p style={{
+        opacity: ready ? 0.45 : 0,
+        transition: 'opacity 0.8s',
+        fontFamily: "'Libre Baskerville', serif",
+        fontSize: '0.72rem',
+        fontStyle: 'italic',
+        color: 'var(--text-dim)',
+        marginTop: '0.7rem',
+        letterSpacing: '0.05em',
+      }}>
+        — 입장 시 BGM이 자동으로 재생됩니다 —
+      </p>
       <div className="ls-credit">다크판타지 속 아이를 주웠다 · Made by Kunio</div>
     </div>
   )
@@ -826,44 +1144,130 @@ function Nav({ userName, bgmOn, onToggleBgm }: { userName: string; bgmOn: boolea
     { href: '#characters', label: '인물' },
     { href: '#hope', label: '희망의 조각' },
   ]
+
+  const [activeSection, setActiveSection] = useState<string>('')
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  // ── 현재 섹션 감지 (IntersectionObserver) ──
+  useEffect(() => {
+    const sectionIds = links.map((l) => l.href.slice(1))
+    const observers: IntersectionObserver[] = []
+    const visible = new Set<string>()
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) visible.add(id)
+          else visible.delete(id)
+          // 가장 위쪽(첫 번째) 섹션을 active로
+          const first = sectionIds.find((s) => visible.has(s))
+          setActiveSection(first ?? '')
+        },
+        { threshold: 0.25 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleLinkClick = () => setMenuOpen(false)
+
   return (
-    <nav className="nav">
-      <div className="nav-logo-pane">
-        <img src="/characters/로고.webp" alt="로고" className="nav-logo-img"
-          onError={(e) => { e.currentTarget.style.display = 'none' }} />
-        <div className="nav-logo-text">다크판타지 속 아이를 주웠다</div>
+    <>
+      <nav className="nav">
+        <div className="nav-logo-pane">
+          <img src="/characters/로고.webp" alt="로고" className="nav-logo-img"
+            onError={(e) => { e.currentTarget.style.display = 'none' }} />
+          <div className="nav-logo-text">다크판타지 속 아이를 주웠다</div>
+        </div>
+
+        {/* ── 데스크탑 링크 ── */}
+        <ul className="nav-links">
+          {links.map((l) => {
+            const isActive = activeSection === l.href.slice(1)
+            return (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className={isActive ? 'nav-link-active' : ''}
+                  onClick={handleLinkClick}
+                >
+                  {l.label}
+                  {isActive && <span className="nav-link-gem" />}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+
+        <div className="nav-right-pane">
+          {userName && <div className="nav-user">◆ {userName}</div>}
+
+          {/* ── BGM 버튼 ── */}
+          <button
+            type="button"
+            className={`nav-bgm-btn${bgmOn ? ' active' : ''}`}
+            onClick={onToggleBgm}
+            title={bgmOn ? 'BGM 끄기' : 'BGM 켜기'}
+            aria-label={bgmOn ? 'BGM 끄기' : 'BGM 켜기'}
+          >
+            <span className="bgm-gem-wrap">
+              <span className="bgm-gem" />
+              <span className="bgm-gem-glow" />
+            </span>
+            <span className="bgm-bars">
+              <span className="bgm-bar" />
+              <span className="bgm-bar" />
+              <span className="bgm-bar" />
+              <span className="bgm-bar" />
+            </span>
+            <span className="bgm-label">{bgmOn ? 'BGM ON' : 'BGM OFF'}</span>
+          </button>
+
+          {/* ── 햄버거 버튼 (모바일) ── */}
+          <button
+            type="button"
+            className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="메뉴 열기"
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </nav>
+
+      {/* ── 모바일 드로어 메뉴 ── */}
+      <div className={`nav-mobile-drawer${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(false)}>
+        <div className="nav-mobile-panel" onClick={(e) => e.stopPropagation()}>
+          <div className="nav-mobile-header">
+            <div className="nav-mobile-title">다크판타지 속 아이를 주웠다</div>
+            <button type="button" className="nav-mobile-close" onClick={() => setMenuOpen(false)}>✕</button>
+          </div>
+          <ul className="nav-mobile-links">
+            {links.map((l) => {
+              const isActive = activeSection === l.href.slice(1)
+              return (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className={isActive ? 'active' : ''}
+                    onClick={handleLinkClick}
+                  >
+                    <span className="nml-gem">{isActive ? '◆' : '◇'}</span>
+                    {l.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+          {userName && <div className="nav-mobile-user">◆ {userName}</div>}
+        </div>
       </div>
-      <ul className="nav-links">
-        {links.map((l) => (
-          <li key={l.href}><a href={l.href}>{l.label}</a></li>
-        ))}
-      </ul>
-      <div className="nav-right-pane">
-        {userName && <div className="nav-user">◆ {userName}</div>}
-        <button
-          type="button"
-          className={`nav-bgm-btn${bgmOn ? ' active' : ''}`}
-          onClick={onToggleBgm}
-          title={bgmOn ? 'BGM 끄기' : 'BGM 켜기'}
-          aria-label={bgmOn ? 'BGM 끄기' : 'BGM 켜기'}
-        >
-          {/* 스테인드글라스 보석 */}
-          <span className="bgm-gem-wrap">
-            <span className="bgm-gem" />
-            <span className="bgm-gem-glow" />
-          </span>
-          {/* 음파 바 4개 */}
-          <span className="bgm-bars">
-            <span className="bgm-bar" />
-            <span className="bgm-bar" />
-            <span className="bgm-bar" />
-            <span className="bgm-bar" />
-          </span>
-          {/* 텍스트 라벨 */}
-          <span className="bgm-label">{bgmOn ? 'BGM ON' : 'BGM OFF'}</span>
-        </button>
-      </div>
-    </nav>
+    </>
   )
 }
 
@@ -946,10 +1350,9 @@ function WorldSection() {
 
 function RegionsSection() {
   const mapW = 400, mapH = 380
-  // 루인하르트(III)를 기준으로 동서남북/특수 지점 연결
   const conns = [
     [50, 50, 25, 50], // 루인하르트 - 에델가르드(서)
-    [50, 50, 10, 45], // 에델가르드 - 희망의 제단(더 서쪽)
+    [25, 50, 8, 50],  // 에델가르드 - 희망의 제단(정 서쪽)
     [50, 50, 75, 50], // 루인하르트 - 루멘의 협곡(동)
     [50, 50, 50, 75], // 루인하르트 - 타르토스(남)
     [50, 50, 50, 30], // 루인하르트 - 아스테리아(북)
@@ -985,56 +1388,137 @@ function RegionsSection() {
           <div className="atlas-glass reveal">
             <div className="atlas-map-pane">
               <svg className="atlas-map-svg" viewBox={`0 0 ${mapW} ${mapH}`} style={{ cursor: 'pointer' }}>
+                {/* 배경 그라데이션 */}
+                <defs>
+                  <radialGradient id="mapBg" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stopColor="rgba(10,20,70,0.18)" />
+                    <stop offset="100%" stopColor="rgba(2,2,8,0)" />
+                  </radialGradient>
+                  <filter id="nodeGlow">
+                    <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <rect width={mapW} height={mapH} fill="url(#mapBg)" />
+
+                {/* 격자선 */}
                 {[20, 40, 60, 80].map((p) => (
                   <g key={p}>
-                    <line x1={(mapW * p) / 100} y1="0" x2={(mapW * p) / 100} y2={mapH} stroke="#141414" strokeWidth="1" strokeDasharray="4,8" />
-                    <line x1="0" y1={(mapH * p) / 100} x2={mapW} y2={(mapH * p) / 100} stroke="#141414" strokeWidth="1" strokeDasharray="4,8" />
+                    <line x1={(mapW * p) / 100} y1="0" x2={(mapW * p) / 100} y2={mapH} stroke="#1a1a22" strokeWidth="1" strokeDasharray="3,10" />
+                    <line x1="0" y1={(mapH * p) / 100} x2={mapW} y2={(mapH * p) / 100} stroke="#1a1a22" strokeWidth="1" strokeDasharray="3,10" />
                   </g>
                 ))}
-                {conns.map(([x1, y1, x2, y2], i) => (
-                  <line key={i} x1={(mapW * x1) / 100} y1={(mapH * y1) / 100} x2={(mapW * x2) / 100} y2={(mapH * y2) / 100} stroke="rgba(10,26,106,0.3)" strokeWidth="1" strokeDasharray="5,5" />
-                ))}
+
+                {/* 연결선 — 선택 시 강조 */}
+                {conns.map(([x1, y1, x2, y2], i) => {
+                  const isActive = selRegion && (
+                    (selRegion.cx === x1 && selRegion.cy === y1) ||
+                    (selRegion.cx === x2 && selRegion.cy === y2)
+                  )
+                  return (
+                    <line key={i}
+                      x1={(mapW * x1) / 100} y1={(mapH * y1) / 100}
+                      x2={(mapW * x2) / 100} y2={(mapH * y2) / 100}
+                      stroke={isActive ? 'rgba(58,106,238,0.55)' : 'rgba(20,36,120,0.25)'}
+                      strokeWidth={isActive ? 1.5 : 1}
+                      strokeDasharray={isActive ? '6,4' : '4,8'}
+                    />
+                  )
+                })}
+
+                {/* 지역 노드 */}
                 {REGIONS.map((r, i) => {
                   const x = (mapW * r.cx) / 100
                   const y = (mapH * r.cy) / 100
                   const isCenter = r.num === 'III'
                   const isSelected = selRegion?.num === r.num
+                  const labelY = r.cy > 55 ? y - 22 : y + 24
                   return (
-                    <g key={i} onClick={() => handleRegionClick(r)} style={{ cursor: 'pointer' }}>
-                      {/* 선택 시 외부 링 */}
-                      {isSelected && <circle cx={x} cy={y} r="22" fill="none" stroke="rgba(58,106,238,0.5)" strokeWidth="1.5" />}
+                    <g key={i} onClick={() => handleRegionClick(r)} style={{ cursor: 'pointer' }} filter={isSelected ? 'url(#nodeGlow)' : undefined}>
+                      {/* 선택 시 외부 링 애니메이션 효과 */}
+                      {isSelected && (
+                        <>
+                          <circle cx={x} cy={y} r="26" fill="none" stroke={isCenter ? 'rgba(204,26,42,0.25)' : 'rgba(58,106,238,0.2)'} strokeWidth="1" />
+                          <circle cx={x} cy={y} r="20" fill="none" stroke={isCenter ? 'rgba(204,26,42,0.45)' : 'rgba(58,106,238,0.4)'} strokeWidth="1.5" />
+                        </>
+                      )}
                       {isCenter
-                        ? <circle cx={x} cy={y} r={isSelected ? 16 : 14} fill={isSelected ? 'rgba(139,10,26,0.9)' : 'rgba(139,10,26,0.7)'} stroke={isSelected ? '#ff4444' : '#cc2020'} strokeWidth="2" />
-                        : <rect x={x - 7} y={y - 7} width="14" height="14" fill={isSelected ? 'rgba(58,106,238,0.8)' : 'rgba(10,26,106,0.5)'} stroke={isSelected ? '#88aaff' : '#3a6aee'} strokeWidth="1.5" transform={`rotate(45 ${x} ${y})`} />
+                        ? <>
+                            {/* 루인하르트 — 원형 */}
+                            <circle cx={x} cy={y} r={isSelected ? 13 : 11}
+                              fill={isSelected ? 'rgba(139,10,26,0.95)' : 'rgba(90,6,16,0.75)'}
+                              stroke={isSelected ? '#e03030' : '#8a0f1a'}
+                              strokeWidth="2" />
+                            <circle cx={x} cy={y} r="4" fill={isSelected ? '#ff6060' : '#cc2020'} opacity="0.9" />
+                          </>
+                        : <>
+                            {/* 일반 지역 — 다이아몬드 */}
+                            <rect x={x - 8} y={y - 8} width="16" height="16"
+                              fill={isSelected ? 'rgba(58,106,238,0.85)' : 'rgba(10,26,106,0.55)'}
+                              stroke={isSelected ? '#aac0ff' : '#3a6aee'}
+                              strokeWidth="1.5"
+                              transform={`rotate(45 ${x} ${y})`} />
+                            <rect x={x - 3} y={y - 3} width="6" height="6"
+                              fill={isSelected ? '#c0d4ff' : 'rgba(58,106,238,0.6)'}
+                              transform={`rotate(45 ${x} ${y})`} />
+                          </>
                       }
-                      <text x={x} y={y + (r.cy > 50 ? -20 : 22)} textAnchor="middle" fill={isCenter ? '#cc2020' : 'rgba(58,106,238,0.7)'} fontSize="11" fontFamily="Cinzel, serif" letterSpacing="0.05em">
+                      {/* 지역명 */}
+                      <text x={x} y={labelY}
+                        textAnchor="middle"
+                        fill={isSelected ? (isCenter ? '#ff8080' : '#aac0ff') : (isCenter ? 'rgba(204,26,42,0.75)' : 'rgba(58,106,238,0.65)')}
+                        fontSize={isSelected ? '12' : '11'}
+                        fontFamily="Cinzel, serif"
+                        letterSpacing="0.04em"
+                        fontWeight={isSelected ? '600' : '400'}
+                      >
                         {r.name}
                       </text>
                     </g>
                   )
                 })}
-                <text x="370" y="20" fill="rgba(139,10,26,0.3)" fontSize="9" fontFamily="Cinzel,serif">N</text>
+
+                {/* 나침반 */}
+                <g opacity="0.35">
+                  <text x="376" y="18" fill="rgba(58,106,238,0.8)" fontSize="10" fontFamily="Cinzel,serif" fontWeight="600">N</text>
+                  <line x1="380" y1="20" x2="380" y2="30" stroke="rgba(58,106,238,0.4)" strokeWidth="1" />
+                </g>
               </svg>
             </div>
+
             <div className="atlas-entries-pane">
-              {REGIONS.map((r, i) => (
-                <div
-                  className={`region-list-item${selRegion?.num === r.num ? ' active' : ''}${r.npcId ? ' clickable' : ''}`}
-                  key={i}
-                  onClick={() => handleRegionClick(r)}
-                >
-                  <div className="rli-num">{r.num}</div>
-                  <div className="rli-body">
-                    <div className="rli-name">{r.name}</div>
-                    <div className="rli-desc">{r.desc}</div>
-                    <div className="rli-npc">⚔ {r.npc}{r.npcId && <span className="rli-npc-hint"> · 클릭하여 확인</span>}</div>
+              {REGIONS.map((r, i) => {
+                const isSelected = selRegion?.num === r.num
+                const isCenter = r.num === 'III'
+                return (
+                  <div
+                    className={`region-list-item${isSelected ? ' active' : ''}${r.npcId ? ' clickable' : ''}`}
+                    key={i}
+                    onClick={() => handleRegionClick(r)}
+                    style={isSelected ? {
+                      background: isCenter ? 'rgba(90,6,16,0.08)' : 'rgba(10,26,106,0.1)',
+                      borderLeft: isCenter ? '2px solid rgba(139,10,26,0.5)' : '2px solid rgba(58,106,238,0.45)',
+                    } : {}}
+                  >
+                    <div className="rli-num" style={isSelected ? {
+                      color: isCenter ? 'rgba(204,26,42,0.9)' : 'rgba(58,106,238,0.9)',
+                      background: isCenter ? 'rgba(90,6,16,0.12)' : 'rgba(10,26,106,0.12)',
+                    } : {}}>{r.num}</div>
+                    <div className="rli-body">
+                      <div className="rli-name" style={isSelected ? { color: '#fff' } : {}}>{r.name}</div>
+                      <div className="rli-desc">{r.desc}</div>
+                      <div className="rli-npc">
+                        {isCenter ? '⬧' : '◇'} {r.npc}
+                        {r.npcId && <span className="rli-npc-hint"> · 클릭하여 확인</span>}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
-          {/* 지역 NPC 팝업 */}
+          {/* 지역 팝업 */}
           {selRegion && (
             <div className="region-popup reveal visible">
               <div className="rp-header">
@@ -1048,7 +1532,7 @@ function RegionsSection() {
               <div className="rp-body">
                 <p className="rp-desc">{selRegion.desc}</p>
                 {selChar && (
-                  <div className="rp-char-row" onClick={() => { /* 캐릭터 모달은 CharsSection에서 관리 */ }}>
+                  <div className="rp-char-row">
                     <img src={`/characters/${selChar.id}_thumb.webp`} alt={selChar.name} className="rp-char-img" onError={(e) => { e.currentTarget.style.display = 'none' }} />
                     <div className="rp-char-info">
                       <div className="rp-char-name">{selChar.name}</div>
@@ -1063,7 +1547,6 @@ function RegionsSection() {
           )}
         </div>
       </div>
-      {/* CharModal은 CharsSection에서만 관리 */}
     </>
   )
 }
@@ -1142,10 +1625,6 @@ function CharCard({ char, onClick }: { char: CharType; onClick: (c: CharType) =>
           <span className="relic-meta-item">{char.species}</span>
           <span className="relic-meta-item">{char.gender}</span>
         </div>
-        <div className="relic-lead-rule" />
-        <div className="relic-skill-name">⬧ {char.ability}</div>
-        <div className="relic-skill-desc">{char.abilityDesc.length > 80 ? char.abilityDesc.slice(0, 80) + '...' : char.abilityDesc}</div>
-        <div className="relic-traits">{char.traits.map((t, i) => <span className="relic-trait" key={i}>{t}</span>)}</div>
         {char.hopeShard && <div className="relic-hope">◈ 희망의 조각 「{char.hopeShard}」</div>}
       </div>
     </div>
@@ -1153,6 +1632,17 @@ function CharCard({ char, onClick }: { char: CharType; onClick: (c: CharType) =>
 }
 
 function CharModal({ char, onClose }: { char: CharType | null; onClose: () => void }) {
+  // ── 뒤로가기 지원 (history API) ──
+  useEffect(() => {
+    if (!char) return
+    window.history.pushState({ charModal: char.id }, '', window.location.href)
+    const handlePop = () => onClose()
+    window.addEventListener('popstate', handlePop)
+    return () => {
+      window.removeEventListener('popstate', handlePop)
+    }
+  }, [char, onClose])
+
   if (!char) return null
   const rankColors: Record<string, string> = { 'rg-god': '#3a2a08', 'rg-mad': '#380606', 'rg-crack': '#1c2830', 'rg-deep': '#2e200a', 'rg-carve': '#181e20', '': '#222' }
   const rc = rankColors[char.rankCls] ?? '#222'
@@ -1169,7 +1659,7 @@ function CharModal({ char, onClose }: { char: CharType | null; onClose: () => vo
   const [unlocked, setUnlocked] = useState(false)
 
   const tryUnlock = () => {
-    if (keyword.trim() === '메리 수') {
+    if (keyword.replace(/\s/g, '') === '메리수') {
       setUnlocked(true)
       setShowTrue(true)
       setKeywordError(false)
@@ -1491,8 +1981,9 @@ export default function App() {
   const [bgmOn, setBgmOn] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  const handleEnter = useCallback((n: string) => {
+  const handleEnter = useCallback((n: string, bgmStarted?: boolean) => {
     setUserName(n)
+    if (bgmStarted) setBgmOn(true)
     setShowIntro(true)
   }, [])
 
@@ -1501,16 +1992,7 @@ export default function App() {
     setShowIntro(false)
   }, [])
 
-  // 앱 로딩 시 BGM 자동 재생 시도 (로딩 화면부터)
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-    audio.volume = 0.35
-    audio.loop = true
-    audio.play()
-      .then(() => setBgmOn(true))
-      .catch(() => { /* 브라우저 자동재생 정책으로 막힌 경우 무시 */ })
-  }, [])
+  // 앱 로딩 시 자동재생은 브라우저 정책상 불가 — LoadingScreen 클릭에서 재생
 
   const toggleBgm = useCallback(() => {
     const audio = audioRef.current
@@ -1539,7 +2021,7 @@ export default function App() {
       <style>{BGM_CSS}</style>
       {/* BGM 오디오 — /public/bgm.mp3 에 파일 배치 */}
       <audio ref={audioRef} src="/bgm.mp3" preload="auto" />
-      {!entered && !showIntro && <LoadingScreen onEnter={handleEnter} />}
+      {!entered && !showIntro && <LoadingScreen onEnter={handleEnter} audioRef={audioRef} />}
       {showIntro && <IntroTyping onDone={handleIntroDone} />}
       {entered && (
         <>
