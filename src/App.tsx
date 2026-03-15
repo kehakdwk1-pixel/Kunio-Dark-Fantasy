@@ -1501,17 +1501,16 @@ export default function App() {
     setShowIntro(false)
   }, [])
 
-  // 진입 시 BGM 자동 재생 시도
+  // 앱 로딩 시 BGM 자동 재생 시도 (로딩 화면부터)
   useEffect(() => {
-    if (!entered) return
     const audio = audioRef.current
     if (!audio) return
     audio.volume = 0.35
     audio.loop = true
     audio.play()
       .then(() => setBgmOn(true))
-      .catch(() => { /* 브라우저 정책으로 자동재생 막힌 경우 무시 */ })
-  }, [entered])
+      .catch(() => { /* 브라우저 자동재생 정책으로 막힌 경우 무시 */ })
+  }, [])
 
   const toggleBgm = useCallback(() => {
     const audio = audioRef.current
